@@ -11,10 +11,11 @@ import { EmployeeDeleteModalComponent } from '../employee-delete-modal/employee-
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  employee: Employee
-  showMessageSuccess = false
-  employeeToEdit: Employee
-  employeeToDelete: Employee
+  employee: Employee;
+  showMessageSuccess = false;
+  employeeToEdit: Employee;
+  employeeToDelete: Employee;
+  data = new Date();
 
   @ViewChild(EmployeeNewModalComponent, { static: true }) //pegar uma referencia de algum componente (no caso a primeira div)
   employeeNewModal: EmployeeNewModalComponent

@@ -5,16 +5,12 @@ import { Directive, ElementRef, Input } from '@angular/core';
 })
 export class SalaryColorDirective {
 
+  constructor(private element: ElementRef) {}
+
   @Input()
-  salaryColor
-
-  constructor(private element: ElementRef) {
-    setTimeout(() => {
-      const nativeElement: HTMLElement = this.element.nativeElement
-      const salary = parseFloat(this.salaryColor)
-      nativeElement.style.color = salary > 20000 ? 'green' : 'red'
-      //this.element.nativeElement.innerHTML = this.salaryColor 
-    }, 2000)
-   }
-
+  set salaryColor(value) {          //set transforma um método em uma variável, permitindo o uso do decorator Input
+    const nativeElement: HTMLElement = this.element.nativeElement;  //ajuda tambem quando um metodo tem que ser reatribuido
+    const salary = parseFloat(value);
+    nativeElement.style.color = salary > 3000 ? 'green' : '';
+  }
 }

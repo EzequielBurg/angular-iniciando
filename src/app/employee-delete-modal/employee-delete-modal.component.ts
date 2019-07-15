@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { Employee, EmployeeService } from '../employee.service';
-import * as $ from 'jquery'
+import * as $ from 'jquery';
 
 @Component({
   selector: 'employee-delete-modal',
