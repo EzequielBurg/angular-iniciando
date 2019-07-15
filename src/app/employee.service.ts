@@ -11,8 +11,8 @@ export interface Employee{
 })
 export class EmployeeService {
   employees: Employee[] = [
-    {name: 'Ezequiel Burg', salary: 1800, bonus: 300},
-    {name: 'Dani Maria', salary:1100, bonus: 1350}
+    {name: 'Rafael Borges', salary: 1800, bonus: 300},
+    {name: 'Chica Maria', salary:1100, bonus: 1350}
   ]
 
   constructor() { }

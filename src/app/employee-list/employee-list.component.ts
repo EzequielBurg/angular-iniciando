@@ -31,7 +31,7 @@ export class EmployeeListComponent implements OnInit {
 	}
 
 	openEdit(employee:Employee) {
-		this.employee = employee
+		this.employeeToEdit = employee
 		this.employeeEdit.showModal()
 	}
 
