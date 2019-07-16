@@ -4,6 +4,6 @@ interface Employees{
     bonus:number
 }
 
-const employees: Employees[] = []
+const employees: Employees[] = [];
 
-export default employees
+export default employees;

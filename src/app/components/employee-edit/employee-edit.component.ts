@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, Output, Input, EventEmitter } from '@angular/core'
-import { Employee } from '../employee.service'
+import { Employee } from '../../services/employee.service'
 import * as $ from 'jquery'
 
 @Component({

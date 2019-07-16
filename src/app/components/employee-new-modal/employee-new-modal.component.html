@@ -1,0 +1,82 @@
+<form (submit)="addEmployee()">
+  <modal>
+    <h5 class="modal-title" modal-title>Novo empregado</h5>
+    <div class="modal-body" modal-body>
+      <div class="form-group">
+        <label>Nome</label>
+        <input class="form-control" name="name" type="text" [(ngModel)]="employee.name" autofocus>
+      </div>
+
+      <div class="form-group">
+        <label>Salário</label>
+        <input class="form-control" name="salary" type="text" [(ngModel)]="employee.salary">
+      </div>
+
+      <div class="form-group" [hidden]="employee.salary >= 1000">
+        <label>Bônus</label>
+        <input class="form-control" name="bonus" type="text" [(ngModel)]="employee.bonus">
+      </div>
+    </div>
+    <div class="form-group" drop>
+      <div class="dropdown" style="padding-left: 15px;">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sexo
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Feminino</a>
+          <a class="dropdown-item" href="#">Masculino</a>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer" modal-footer>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      <button type="submit" class="btn btn-primary">Incluir</button>
+    </div>
+  </modal>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- TESTE - Botão para acionar modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+    Abrir modal de demonstração
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label>Teste</label>
+              <input class="form-control" name="teste" type="text" autofocus>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary">Salvar mudanças</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import employees from '../employees'
-import { EmployeeService, Employee } from '../employee.service'
+import { EmployeeService, Employee } from '../../services/employee.service';
 import { EmployeeNewModalComponent } from '../employee-new-modal/employee-new-modal.component';
 import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
 import { EmployeeDeleteModalComponent } from '../employee-delete-modal/employee-delete-modal.component';
@@ -18,13 +17,13 @@ export class EmployeeListComponent implements OnInit {
   data = new Date();
 
   @ViewChild(EmployeeNewModalComponent, { static: true }) //pegar uma referencia de algum componente (no caso a primeira div)
-  employeeNewModal: EmployeeNewModalComponent
+  employeeNewModal: EmployeeNewModalComponent;
 
   @ViewChild(EmployeeEditComponent, { static: true }) //pegar uma referencia de algum componente (no caso a primeira div)
-  employeeEdit: EmployeeEditComponent
+  employeeEdit: EmployeeEditComponent;
 
   @ViewChild(EmployeeDeleteModalComponent, { static: true }) //pegar uma referencia de algum componente (no caso a primeira div)
-  employeeDeleteModal: EmployeeDeleteModalComponent
+  employeeDeleteModal: EmployeeDeleteModalComponent;
 
   constructor(public employeeService: EmployeeService) {
   }
@@ -33,22 +32,22 @@ export class EmployeeListComponent implements OnInit {
   }
 
   openNewModal() {
-    this.employeeNewModal.showModal()
+    this.employeeNewModal.showModal();
   }
 
   openEdit(employee: Employee) {
-    this.employeeToEdit = employee
-    this.employeeEdit.showModal()
+    this.employeeToEdit = employee;
+    this.employeeEdit.showModal();
   }
 
-  openDestroyModal(employee: Employee){
-    this.employeeToDelete = employee
-    this.employeeDeleteModal.showModal()
+  openDestroyModal(employee: Employee) {
+    this.employeeToDelete = employee;
+    this.employeeDeleteModal.showModal();
   }
 
   onNewEmployee(employee: Employee) {
-    this.employee = employee
-    this.showMessageSuccess = true
+    this.employee = employee;
+    this.showMessageSuccess = true;
   }
 
   onEditEmployee(employee: Employee) {
