@@ -12,6 +12,8 @@ import { EmployeeDeleteModalComponent } from '../employee-delete-modal/employee-
 export class EmployeeListComponent implements OnInit {
   employee: Employee;
   showMessageSuccess = false;
+  showMessageEdit    = false;
+  showMessageDelete  = false;
   employeeToEdit: Employee;
   employeeToDelete: Employee;
   data = new Date();
@@ -52,9 +54,15 @@ export class EmployeeListComponent implements OnInit {
 
   onEditEmployee(employee: Employee) {
     console.log(employee);
+    this.showMessageEdit = true;
   }
 
   onDestroyEmployee(employee: Employee) {
     console.log(employee);
+    this.showMessageDelete = true;
+  }
+
+  fechou(event) {
+    console.log(event);
   }
 }

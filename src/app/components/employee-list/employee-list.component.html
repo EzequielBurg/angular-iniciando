@@ -1,8 +1,18 @@
 <div class="container">
+
   <alert-success [hidden]="!showMessageSuccess">
     O empregado <strong>{{ employee?.name }}</strong> foi cadastrado com sucesso!
   </alert-success>
-  <h5>{{ data | date:'fullDate' | uppercase }}</h5> <br>
+
+  <alert-success [hidden]="!showMessageEdit">
+    O empregado <strong>{{ employee?.name }}</strong> foi editado com sucesso!
+  </alert-success>
+
+  <alert-success [hidden]="!showMessageDelete">
+    O empregado <strong>{{ employee?.name }}</strong> foi excluído com sucesso!
+  </alert-success>
+
+  <h5>{{ data | date:'fullDate' }}</h5> <br>
   <div class="row">
     <h1>Lista de empregados</h1>
     <table class="table table-light">
@@ -37,6 +47,6 @@
   </div>
 </div>
 
-<employee-new-modal (onSubmit)="onNewEmployee($event)"></employee-new-modal>
+<employee-new-modal (onSubmit)="onNewEmployee($event)" (onHide)="fechou($event)"></employee-new-modal>
 <employee-edit [employee]="employeeToEdit" (onSubmit)="onEditEmployee($event)"></employee-edit>
 <employee-delete-modal [employee]="employeeToDelete" (onDestroy)="onDestroyEmployee($event)"></employee-delete-modal>

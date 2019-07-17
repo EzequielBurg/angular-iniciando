@@ -1,12 +1,11 @@
-import { Component, OnInit, ElementRef, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Employee, EmployeeService} from '../../services/employee.service';
-import { ModalComponent } from '../modal/modal.component';
 import { Modalable } from '../modal/modalable';
 
 @Component({
-  selector: 'employee-new-modal',
-  templateUrl: './employee-new-modal.component.html',
-  styleUrls: ['./employee-new-modal.component.css']
+selector: 'employee-new-modal',
+templateUrl: './employee-new-modal.component.html',
+styleUrls: ['./employee-new-modal.component.css']
 })
 export class EmployeeNewModalComponent extends Modalable implements OnInit {
 
@@ -24,6 +23,7 @@ export class EmployeeNewModalComponent extends Modalable implements OnInit {
   }
 
   ngOnInit() {
+    super.ngOnInit();
   }
 
   addEmployee(event) {
@@ -32,4 +32,12 @@ export class EmployeeNewModalComponent extends Modalable implements OnInit {
     this.onSubmit.emit(copy);
     this.hide();
   }
+
+  /*fechou(event) {
+    console.log(event);
+  }
+
+  mostrou(event) {
+    console.log(event);
+  }*/
 }
