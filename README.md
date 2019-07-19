@@ -1,4 +1,4 @@
-# IniciandoAngular - Angular Componentes - Angular Componentes/Intermediário
+# IniciandoAngular - Angular Componentes - Angular Componentes/Intermediário - Angular Templates e HTML
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0, and posses three courses of School of Net.
 

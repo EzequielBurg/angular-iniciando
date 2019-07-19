@@ -6,12 +6,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'iniciando-angular';
+  title = 'angular';
   flagLogo = true;
+  role = 'admin';
+  objContext = {
+    name: 'Joao Bolao',
+  };
+
 
   ngOnInit() {
     setTimeout(() => {
       this.flagLogo = false;
+    }, 5000);
+
+    setTimeout(() => {
+      this.role = 'manager';
     }, 5000);
   }
 }

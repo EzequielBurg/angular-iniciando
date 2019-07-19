@@ -19,6 +19,7 @@ export class EmployeeListComponent implements OnInit {
   employeeToDelete: Employee;
   employeeToDetail: Employee;
   data = new Date();
+  isLoading = true;
 
   @ViewChild('employeeNewModal', { static: true })
   employeeNewModal: EmployeeNewModalComponent;
@@ -36,6 +37,9 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 5000);
   }
 
   openNewModal() {
