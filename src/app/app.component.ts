@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'iniciando-angular';
+  flagLogo = true;
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.flagLogo = false;
+    }, 5000);
+  }
 }

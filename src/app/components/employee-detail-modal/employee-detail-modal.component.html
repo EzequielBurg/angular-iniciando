@@ -1,0 +1,40 @@
+<modal>
+  <h5 class="modal-title" modal-title> Empregado {{ employee?.name }} </h5>
+  <div class="modal-body" modal-body>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th scope="row"> Nome </th>
+          <td> {{ employee?.name }} </td>
+        </tr>
+
+        <tr *ngIf="employee?.salary < 2000; else notBonus">
+          <th scope="row"> Bônus </th>
+          <td> {{ employee?.bonus }} </td>
+        </tr>
+
+        <ng-template #notBonus>
+          <tr>
+            <th scope="row"> Obs.: </th>
+            <td> Funcionário não possui bônus </td>
+          </tr>
+        </ng-template>
+
+      </tbody>
+    </table>
+    <!-- <div [ngSwitch]="employee?.bonus">
+      <span *ngSwitchCase="10">Bônus baixo</span>
+      <ng-container *ngSwitchCase="100">Bônus médio</ng-container>
+      <ng-container *ngSwitchCase="1000">Bônus alto</ng-container>
+    </div> -->
+
+    <ng-container [ngSwitch]="employee?.bonus">
+        <span *ngSwitchCase="10">Bônus baixo</span>
+        <ng-container *ngSwitchCase="100" >Bônus médio</ng-container>
+        <ng-container *ngSwitchCase="1000">Bônus alto</ng-container>
+    </ng-container>
+  </div>
+  <div class="modal-footer" modal-footer>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+  </div>
+</modal>

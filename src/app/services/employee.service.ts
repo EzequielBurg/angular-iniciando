@@ -12,7 +12,10 @@ export interface Employee {
 export class EmployeeService {
   employees: Employee[] = [
     { name: 'Rafael Borges', salary: 1800, bonus: 300 },
-    { name: 'Chica Maria', salary: 1100, bonus: 1350 }
+    { name: 'Chica Maria', salary: 1100, bonus: 5 },
+    { name: 'José Alfredo', salary: 2360, bonus: 10 },
+    { name: 'Clodoaldo Santana', salary: 1120, bonus: 100 },
+    { name: 'Gerônsio Albuquerque', salary: 1642, bonus: 1000 }
   ];
 
   constructor() { }

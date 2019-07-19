@@ -1,2 +1,13 @@
+<ng-container *ngTemplateOutlet="logo"></ng-container>
+<ng-container *ngTemplateOutlet="flagLogo ? logo : logoSmall"></ng-container>
+
 <employee-list></employee-list>
 
+<ng-template #logo>
+  <img src="../assets/logo.png" alt="Logo">
+</ng-template>
+
+
+<ng-template #logoSmall>
+  <img src="../assets/logo.png" alt="Logo" width="50" height="50">
+</ng-template>

@@ -22,6 +22,7 @@ export class EmployeeDeleteModalComponent extends Modalable implements OnInit {
   }
 
   ngOnInit() {
+    super.ngOnInit();
   }
 
   destroy() {

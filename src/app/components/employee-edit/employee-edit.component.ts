@@ -22,6 +22,7 @@ export class EmployeeEditComponent extends Modalable implements OnInit {
   }
 
   ngOnInit() {
+    super.ngOnInit();
   }
 
   addEmployee(event) {
