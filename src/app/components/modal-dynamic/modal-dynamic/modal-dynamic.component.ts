@@ -5,7 +5,7 @@ declare const $;
 @Component({
   selector: 'modal-dynamic',
   template: `
-  <div class="modal" tabindex="-1" role="dialog" aria-hidden="true" id="#novoEmpregado">
+  <div class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <ng-content modalContent></ng-content>
