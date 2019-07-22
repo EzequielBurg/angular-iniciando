@@ -16,6 +16,7 @@ export class ModalServiceService {
     componentRef.instance.mount(modalImplementedComponent);
 
     this.appRef.attachView(componentRef.hostView);
+    // attachView(componentRef.hostView);
 
     const domElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
 
