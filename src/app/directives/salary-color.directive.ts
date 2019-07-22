@@ -14,3 +14,9 @@ export class SalaryColorDirective {
     nativeElement.style.color = salary >= 3000 ? 'green' : '';
   }
 }
+
+
+//nativeElement pega o DOM do elemento
+
+
+//a diretiva serve para extrair coisas de um elemento ou ate mesmo de um componente

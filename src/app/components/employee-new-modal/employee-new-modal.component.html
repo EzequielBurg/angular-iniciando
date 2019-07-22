@@ -5,12 +5,12 @@
     <div class="modal-body" modal-body>
       <div class="form-group">
         <label>Nome</label>
-        <input class="form-control" name="name" type="text" [(ngModel)]="employee.name" #inputName>
+        <input class="form-control" name="name" type="text" [(ngModel)]="employee.name" appInput>
       </div>
 
       <div class="form-group">
         <label>Salário</label>
-        <input class="form-control" name="salary" type="text" [(ngModel)]="employee.salary">
+        <input class="form-control" name="salary" type="text" [(ngModel)]="employee.salary" #inputSalary>
       </div>
 
       <div class="form-group" [hidden]="employee.salary >= 1000">

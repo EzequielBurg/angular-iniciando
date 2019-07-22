@@ -42,12 +42,12 @@ export class ModalComponent implements OnInit {
     nativeElement.querySelector('[modal-footer]');
 
     $(this.divModal).on('hidden.bs.modal', (e) => {
-      //console.log('escondido', e);
+      // console.log('escondido', e);
       this.onHide.emit(e);
     });
 
     $(this.divModal).on('shown.bs.modal', (e) => {
-      //console.log('mostrado', e);
+      // console.log('mostrado', e);
       this.onShow.emit(e);
     });
   }
