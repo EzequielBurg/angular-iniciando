@@ -1,6 +1,6 @@
-# IniciandoAngular - Angular Componentes - Angular Componentes/Intermediário - Angular Templates e HTML
+# IniciandoAngular - Angular Componentes - Angular Componentes/Intermediário - Angular Templates e HTML - Angular Componentes Dinâmicos
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0, and posses three courses of School of Net.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0, and has several courses of School of Net.
 
 ## Development server
 
