@@ -4,6 +4,7 @@ import { EmployeeNewModalComponent } from '../employee-new-modal/employee-new-mo
 import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
 import { EmployeeDeleteModalComponent } from '../employee-delete-modal/employee-delete-modal.component';
 import { EmployeeDetailModalComponent } from '../employee-detail-modal/employee-detail-modal.component';
+import { ModalServiceService } from '../modal-dynamic/modal-service.service';
 
 @Component({
   selector: 'employee-list',
@@ -21,9 +22,6 @@ export class EmployeeListComponent implements OnInit {
   data = new Date();
   isLoading = true;
 
-  @ViewChild('employeeNewModal', { static: true })
-  employeeNewModal: EmployeeNewModalComponent;
-
   @ViewChild(EmployeeEditComponent, { static: true }) //pegar uma referencia de algum componente (no caso a primeira div)
   employeeEdit: EmployeeEditComponent;
 
@@ -33,7 +31,7 @@ export class EmployeeListComponent implements OnInit {
   @ViewChild(EmployeeDetailModalComponent, { static: true })
   employeeDetailModal: EmployeeDetailModalComponent;
 
-  constructor(public employeeService: EmployeeService) {
+  constructor(public employeeService: EmployeeService, private modalService: ModalServiceService) {
   }
 
   ngOnInit() {
@@ -43,7 +41,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   openNewModal() {
-    this.employeeNewModal.showModal();
+    this.modalService.open(EmployeeNewModalComponent);
   }
 
   openEdit(employee: Employee) {

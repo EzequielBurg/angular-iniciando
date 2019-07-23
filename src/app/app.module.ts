@@ -51,7 +51,8 @@ import { TestModalDynamicComponent } from './components/test-modal-dynamic/test-
     EmployeeListComponent,
     TestDynamicComponentComponent,
     ModalDynamicComponent,
-    TestModalDynamicComponent
+    TestModalDynamicComponent,
+    EmployeeNewModalComponent,
   ],
 
   imports: [

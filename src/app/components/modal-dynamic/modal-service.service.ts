@@ -16,12 +16,13 @@ export class ModalServiceService {
     componentRef.instance.mount(modalImplementedComponent);
 
     this.appRef.attachView(componentRef.hostView);
-    // attachView(componentRef.hostView);
 
     const domElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
 
     document.body.appendChild(domElement);
 
-    componentRef.instance.showModal();
+    setTimeout(() => {
+      componentRef.instance.showModal();
+    }, 100);
   }
 }

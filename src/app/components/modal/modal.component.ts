@@ -15,7 +15,6 @@ template: `
         </button>
       </div>
       <ng-content select="[modal-body]"></ng-content>
-      <ng-content select="[drop]"></ng-content>
       <ng-content select="[modal-footer]"></ng-content>
     </div>
   </div>

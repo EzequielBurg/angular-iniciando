@@ -1,37 +1,32 @@
+<modal-title>
+  <h5 modal-title>Novo empregado</h5>
+</modal-title>
+
 <form (submit)="addEmployee()">
-  <!--<modal (onHide)="fechou($event)" (onShow)="mostrou($event)">-->
-  <modal>
-    <h5 class="modal-title" modal-title>Novo empregado</h5>
-    <div class="modal-body" modal-body>
-      <div class="form-group">
-        <label>Nome</label>
-        <input class="form-control" name="name" type="text" [(ngModel)]="employee.name" appInput>
-      </div>
 
-      <div class="form-group">
-        <label>Salário</label>
-        <input class="form-control" name="salary" type="text" [(ngModel)]="employee.salary" #inputSalary>
-      </div>
+  <modal-body></modal-body>
+  <div modal-body>
+    <div class="form-group">
+      <label>Nome</label>
+      <input class="form-control" name="name" type="text" [(ngModel)]="employee.name" appInput>
+    </div>
 
-      <div class="form-group" [hidden]="employee.salary >= 1000">
-        <label>Bônus</label>
-        <input class="form-control" name="bonus" type="text" [(ngModel)]="employee.bonus">
-      </div>
+    <div class="form-group">
+      <label>Salário</label>
+      <input class="form-control" name="salary" type="text" [(ngModel)]="employee.salary" #inputSalary>
     </div>
-    <div class="form-group" drop>
-      <div class="dropdown" style="padding-left: 15px;">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Sexo
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Feminino</a>
-          <a class="dropdown-item" href="#">Masculino</a>
-        </div>
-      </div>
+
+    <div class="form-group" [hidden]="employee.salary >= 1000">
+      <label>Bônus</label>
+      <input class="form-control" name="bonus" type="text" [(ngModel)]="employee.bonus">
     </div>
-    <div class="modal-footer" modal-footer>
+  </div>
+
+  <modal-footer>
+    <div modal-footer>
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
       <button type="submit" class="btn btn-primary">Incluir</button>
     </div>
-  </modal>
+  </modal-footer>
+
 </form>
