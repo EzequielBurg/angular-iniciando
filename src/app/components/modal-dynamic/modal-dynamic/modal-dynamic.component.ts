@@ -8,8 +8,8 @@ declare const $;
   <div class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <ng-content modalContent></ng-content>
-      </div> --->
+        <ng-template modalContent></ng-template>
+      </div>
     </div>
   </div>
   `,

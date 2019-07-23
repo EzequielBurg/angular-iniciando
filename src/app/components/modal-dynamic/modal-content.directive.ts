@@ -1,7 +1,7 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[ModalContent]'
+  selector: '[modalContent]'
 })
 export class ModalContentDirective {
 
