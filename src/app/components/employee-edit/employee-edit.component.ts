@@ -13,8 +13,8 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
 
   employee: Employee;
 
-  @Input('ngModel')
-  model: Employee
+  // @Input('ngModel')
+  // model: Employee
 
   constructor(private modalRef: ModalRefService) {
     // tslint:disable-next-line: no-string-literal
@@ -24,11 +24,11 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges(event) {
-    if (this.model !== event) {
-      this.model.name = event(this.employee.name);
-      this.model.salary = event(this.employee.salary);
-      this.model.name = event(this.employee.bonus);
-    }
+    // if (this.model !== event) {
+    //   this.model.name = event(this.employee.name);
+    //   this.model.salary = event(this.employee.salary);
+    //   this.model.name = event(this.employee.bonus);
+    // }
   }
 
   editEmployee(event) {

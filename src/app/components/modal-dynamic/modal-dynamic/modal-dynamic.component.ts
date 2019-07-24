@@ -36,7 +36,7 @@ export class ModalDynamicComponent implements OnInit, OnDestroy {
   ngOnInit() {}
 
   ngOnDestroy() {
-    console.log('modal dynamic component destruído')
+    console.log('modal dynamic component destruído');
   }
 
   mount(modalImplementedComponent, context = {}): ModalRefService {
