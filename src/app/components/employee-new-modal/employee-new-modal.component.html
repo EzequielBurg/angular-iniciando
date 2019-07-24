@@ -1,29 +1,30 @@
 <modal-title>
-  <h5 modal-title>Novo empregado</h5>
+  <h5 class="modal-title">Novo empregado</h5>
 </modal-title>
 
 <form (submit)="addEmployee()">
 
-  <modal-body></modal-body>
-  <div modal-body>
-    <div class="form-group">
-      <label>Nome</label>
-      <input class="form-control" name="name" type="text" [(ngModel)]="employee.name" appInput>
-    </div>
+  <modal-body>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Nome</label>
+        <input class="form-control" name="name" type="text" [(ngModel)]="employee.name" autofocus>
+      </div>
 
-    <div class="form-group">
-      <label>Salário</label>
-      <input class="form-control" name="salary" type="text" [(ngModel)]="employee.salary" #inputSalary>
-    </div>
+      <div class="form-group">
+        <label>Salário</label>
+        <input class="form-control" name="salary" type="text" [(ngModel)]="employee.salary">
+      </div>
 
-    <div class="form-group" [hidden]="employee.salary >= 1000">
-      <label>Bônus</label>
-      <input class="form-control" name="bonus" type="text" [(ngModel)]="employee.bonus">
+      <div class="form-group" [hidden]="employee.salary >= 1000">
+        <label>Bônus</label>
+        <input class="form-control" name="bonus" type="text" [(ngModel)]="employee.bonus">
+      </div>
     </div>
-  </div>
+  </modal-body>
 
   <modal-footer>
-    <div modal-footer>
+    <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
       <button type="submit" class="btn btn-primary">Incluir</button>
     </div>

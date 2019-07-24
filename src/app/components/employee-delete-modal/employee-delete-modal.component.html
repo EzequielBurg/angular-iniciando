@@ -1,4 +1,21 @@
-<modal>
+<modal-title>
+  <h5 class="modal-title">Exluir empregado {{ employee?.name }}</h5>
+</modal-title>
+
+<modal-body>
+  <div class="modal-body">
+    Deseja excluir o empregado {{ employee?.name }}?
+  </div>
+</modal-body>
+
+<modal-footer>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+    <button type="button" class="btn btn-danger" (click)="destroy()">Excluir</button>
+  </div>
+</modal-footer>
+
+<!-- <modal>
   <h5 class="modal-title" modal-title>Exluir empregado {{ employee?.name }}</h5>
   <div class="modal-body" modal-body>
     Deseja excluir o empregado {{ employee?.name }}?
@@ -7,4 +24,4 @@
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
     <button type="button" class="btn btn-danger" (click)="destroy()">Excluir</button>
   </div>
-</modal>
+</modal> -->

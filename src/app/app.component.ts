@@ -41,8 +41,8 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.getViewContainer.viewContainerRef.createComponent(componentFactory);
     }, 1000000);
 
-    this.modalService.open(TestModalDynamicComponent);
-
+    const modalRef = this.modalService.create(TestModalDynamicComponent);
+    modalRef.show();
 
     // setTimeout(() => {
     //   this.flagLogo = false;

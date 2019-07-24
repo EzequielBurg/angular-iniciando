@@ -120,6 +120,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "iniciando-angular"
+    }
+  },
+  "defaultProject": "iniciando-angular",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

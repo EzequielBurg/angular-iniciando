@@ -1,6 +1,6 @@
-import { Component, OnInit, ElementRef, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Employee } from '../../services/employee.service';
-import { Modalable } from '../modal/modalable';
+import { ModalRefService } from '../modal-dynamic/modal-ref.service';
 
 declare const $;
 
@@ -9,25 +9,30 @@ declare const $;
   templateUrl: './employee-edit.component.html',
   styleUrls: ['./employee-edit.component.css']
 })
-export class EmployeeEditComponent extends Modalable implements OnInit {
+export class EmployeeEditComponent implements OnInit, OnChanges {
 
-  @Input()
   employee: Employee;
 
-	@Output()
-  onSubmit: EventEmitter<Employee> = new EventEmitter<Employee>()
+  @Input('ngModel')
+  model: Employee
 
-  constructor(private element: ElementRef) {
-    super();
+  constructor(private modalRef: ModalRefService) {
+    // tslint:disable-next-line: no-string-literal
+    this.employee = this.modalRef.context['employee'];
   }
 
-  ngOnInit() {
-    super.ngOnInit();
+  ngOnInit() {}
+
+  ngOnChanges(event) {
+    if (this.model !== event) {
+      this.model.name = event(this.employee.name);
+      this.model.salary = event(this.employee.salary);
+      this.model.name = event(this.employee.bonus);
+    }
   }
 
-  addEmployee(event) {
+  editEmployee(event) {
     const copy = Object.assign({}, this.employee);
-    this.onSubmit.emit(copy);
-    this.hide();
+    this.modalRef.hide({employee: copy, submitted: true});
   }
 }

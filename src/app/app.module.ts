@@ -53,6 +53,8 @@ import { TestModalDynamicComponent } from './components/test-modal-dynamic/test-
     ModalDynamicComponent,
     TestModalDynamicComponent,
     EmployeeNewModalComponent,
+    EmployeeEditComponent,
+    EmployeeDeleteModalComponent,
   ],
 
   imports: [

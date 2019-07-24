@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver, ElementRef, Injector, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver, ElementRef, Injector, EventEmitter, OnDestroy } from '@angular/core';
 import { ModalContentDirective } from '../modal-content.directive';
 import { ModalRefService } from '../modal-ref.service';
+import { ReplaySubject } from 'rxjs';
 declare const $;
 
 @Component({
@@ -17,19 +18,33 @@ declare const $;
   styles: []
 })
 
-export class ModalDynamicComponent implements OnInit {
+export class ModalDynamicComponent implements OnInit, OnDestroy {
 
-  @ViewChild(ModalContentDirective, {read: ViewContainerRef, static: true}) modalContent: ModalContentDirective;
+  onHide: ReplaySubject<any> = new ReplaySubject(1);
+
+  onShow: ReplaySubject<any> = new ReplaySubject(1);
+
+  @ViewChild(ModalContentDirective, { static: true }) modalContent: ModalContentDirective;
+  modalRef: ModalRefService;
+
+  hideEventData = null;
+  showEventData = null;
+  contextModal;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private element: ElementRef, private injector: Injector) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    console.log('modal dynamic component destruído')
   }
 
-  mount(modalImplementedComponent) {
+  mount(modalImplementedComponent, context = {}): ModalRefService {
+    this.contextModal = context;
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(modalImplementedComponent);
     const viewContainerRef = this.modalContent.viewContainerRef;
     viewContainerRef.createComponent(componentFactory, null, this.makeLocalInjector());
+    return this.modalRef;
   }
 
   private makeLocalInjector() {
@@ -42,17 +57,43 @@ export class ModalDynamicComponent implements OnInit {
   }
 
   private makeModalRef() {
-    const modalRef = new ModalRefService();
-    modalRef.instance = this;
-    return modalRef;
+    this.modalRef = new ModalRefService();
+    this.modalRef.instance = this;
+    this.modalRef.context = this.contextModal;
+    return this.modalRef;
   }
 
-  hide() {
+  hide(eventData = null) {
+    this.hideEventData = eventData;
     $(this.divModal).modal('hide');
   }
 
-  showModal() {
+  showModal(eventData = null) {
+    this.registerEvents();
+    this.showEventData = eventData;
     $(this.divModal).modal('show');
+  }
+
+  dispose() {   // metodo do bootstrap
+    $(this.divModal).modal('dispose');
+  }
+
+  private registerEvents() {
+    $(this.divModal).on('hidden.bs.modal', (e) => {   // hidden.bs.modal é um evento do bootstrap
+      // console.log('escondido', e);
+      this.onHide.next({
+        event: e,
+        data: this.hideEventData
+      });
+    });
+
+    $(this.divModal).on('shown.bs.modal', (e) => {
+      // console.log('mostrado', e);
+      this.onShow.next({
+        event: e,
+        data: this.showEventData
+      });
+    });
   }
 
   private get divModal(): HTMLElement {

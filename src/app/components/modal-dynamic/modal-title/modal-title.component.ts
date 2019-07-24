@@ -12,14 +12,4 @@ import { Component, OnInit, ElementRef } from '@angular/core';
   `,
   styles: []
 })
-export class ModalTitleComponent implements OnInit {
-
-  constructor(private element: ElementRef) {}
-
-  ngOnInit() {
-    const nativeElement: HTMLElement = this.element.nativeElement;
-    const firstChild = nativeElement.firstChild.firstChild;
-    (firstChild as any).classList.add('modal-title');
-  }
-
-}
+export class ModalTitleComponent {}

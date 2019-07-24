@@ -1,14 +1,14 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import {Employee, EmployeeService} from '../../services/employee.service';
-import { Modalable } from '../modal/modalable';
 import { InputDirective } from 'src/app/directives/input.directive';
+import { ModalRefService } from '../modal-dynamic/modal-ref.service';
 
 @Component({
 selector: 'employee-new-modal',
 templateUrl: './employee-new-modal.component.html',
 styleUrls: ['./employee-new-modal.component.css']
 })
-export class EmployeeNewModalComponent extends Modalable implements OnInit {
+export class EmployeeNewModalComponent implements OnInit {
 
   employee: Employee = {
     name : '',
@@ -23,33 +23,26 @@ export class EmployeeNewModalComponent extends Modalable implements OnInit {
   // @ViewChild('inputSalary', { static: true })
   // inputSalary: InputDirective;
 
-  @Output()
-  onSubmit: EventEmitter<Employee> = new EventEmitter<Employee>()
-
   @ViewChildren(InputDirective)
   inputs;
 
-  constructor(private employeeService: EmployeeService) {
-    super();
-  }
+  constructor(private employeeService: EmployeeService, private modalRef: ModalRefService) {}
 
   ngAfterViewInit() {
     console.log(this.inputs);
   }
 
   ngOnInit() {
-    super.ngOnInit();
-    this.onShow.subscribe(() => {
+    this.modalRef.onShow.subscribe(() => {
       console.log(this.inputName);
-      this.inputName.focus();
+      // this.inputName.focus();
     });
   }
 
   addEmployee(event) {
     const copy = Object.assign({}, this.employee);
     this.employeeService.addEmployee (copy);
-    this.onSubmit.emit(copy);
-    this.hide();
+    this.modalRef.hide({employee: copy, submitted: true});
   }
 
   /*fechou(event) {

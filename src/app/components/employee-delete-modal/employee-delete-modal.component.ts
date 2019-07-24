@@ -1,34 +1,26 @@
-import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Employee, EmployeeService } from '../../services/employee.service';
-import { Modalable } from '../modal/modalable';
-
-import * as $ from 'jquery';
+import { ModalRefService } from '../modal-dynamic/modal-ref.service';
 
 @Component({
   selector: 'employee-delete-modal',
   templateUrl: './employee-delete-modal.component.html',
   styleUrls: ['./employee-delete-modal.component.css']
 })
-export class EmployeeDeleteModalComponent extends Modalable implements OnInit {
+export class EmployeeDeleteModalComponent implements OnInit {
 
-  @Input()
   employee: Employee;
 
-  @Output()
-  onDestroy: EventEmitter<Employee> = new EventEmitter<Employee>()
-
-  constructor(private element: ElementRef, private employeeService: EmployeeService) {
-    super();
+  constructor(private modalRef: ModalRefService, private employeeService: EmployeeService) {
+    // tslint:disable-next-line: no-string-literal
+    this.employee = this.modalRef.context['employee'];
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
+  ngOnInit() {}
 
   destroy() {
     const copy = Object.assign({}, this.employee);
     this.employeeService.destroyEmployee(this.employee);
-    this.onDestroy.emit(copy);
-    this.hide();
+    this.modalRef.hide({employee: copy, submitted: true});
   }
 }

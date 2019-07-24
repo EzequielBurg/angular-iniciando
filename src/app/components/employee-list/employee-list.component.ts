@@ -16,17 +16,13 @@ export class EmployeeListComponent implements OnInit {
   showMessageSuccess = false;
   showMessageEdit    = false;
   showMessageDelete  = false;
-  employeeToEdit: Employee;
-  employeeToDelete: Employee;
+  // employeeToDelete: Employee;
   employeeToDetail: Employee;
   data = new Date();
   isLoading = true;
 
-  @ViewChild(EmployeeEditComponent, { static: true }) //pegar uma referencia de algum componente (no caso a primeira div)
-  employeeEdit: EmployeeEditComponent;
-
-  @ViewChild(EmployeeDeleteModalComponent, { static: true })
-  employeeDeleteModal: EmployeeDeleteModalComponent;
+  // @ViewChild(EmployeeDeleteModalComponent, { static: true }) // pegar uma referencia de algum componente (no caso a primeira div)
+  // employeeDeleteModal: EmployeeDeleteModalComponent;
 
   @ViewChild(EmployeeDetailModalComponent, { static: true })
   employeeDetailModal: EmployeeDetailModalComponent;
@@ -41,18 +37,26 @@ export class EmployeeListComponent implements OnInit {
   }
 
   openNewModal() {
-    this.modalService.open(EmployeeNewModalComponent);
+    const modalRef = this.modalService.create(EmployeeNewModalComponent);
+    // modalRef.instance.onHide.subscribe((data));
+    modalRef.onHide.subscribe((event) => {
+      console.log(event);
+    });
+    modalRef.show();
   }
 
   openEdit(employee: Employee) {
-    this.employeeToEdit = employee;
-    this.employeeEdit.showModal();
-  }
+    const modalRef = this.modalService.create(EmployeeEditComponent, {employee});
+    // modalRef.instance.onHide.subscribe((data));
+    modalRef.onHide.subscribe((event) => {
+      console.log(event);
+    });
+    modalRef.show();
+}
 
   openDetailModal(employee: Employee) {
     this.employeeToDetail = employee;
     this.employeeDetailModal.showModal();
-    console.log(employee);
   }
 
   onDetailEmployee(employee: Employee) {
@@ -60,8 +64,14 @@ export class EmployeeListComponent implements OnInit {
   }
 
   openDestroyModal(employee: Employee) {
-    this.employeeToDelete = employee;
-    this.employeeDeleteModal.showModal();
+    const modalRef = this.modalService.create(EmployeeDeleteModalComponent, {employee});
+    modalRef.onHide.subscribe((event) => {
+      console.log(event);
+    });
+    modalRef.show();
+
+    // this.employeeToDelete = employee;
+    // this.employeeDeleteModal.showModal();
   }
 
   onNewEmployee(employee: Employee) {
