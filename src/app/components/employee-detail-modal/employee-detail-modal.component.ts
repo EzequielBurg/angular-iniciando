@@ -1,30 +1,20 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter, TemplateRef } from '@angular/core';
-import { Modalable } from '../modal/modalable';
+import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../services/employee.service';
+import { ModalRefService } from '../modal-dynamic/modal-ref.service';
 
 @Component({
   selector: 'employee-detail-modal',
   templateUrl: './employee-detail-modal.component.html',
   styleUrls: ['./employee-detail-modal.component.css']
 })
-export class EmployeeDetailModalComponent extends Modalable implements OnInit {
+export class EmployeeDetailModalComponent implements OnInit {
 
-  @Input()
   employee: Employee;
 
-  @Output()
-  onDetail: EventEmitter<Employee> = new EventEmitter<Employee>()
-
-  @ViewChild('notBonus', { static: true })
-  template: TemplateRef<any>;
-
-  constructor() {
-    super();
+  constructor(private modalRef: ModalRefService) {
+    // tslint:disable-next-line: no-string-literal
+    this.employee = this.modalRef.context['employee'];
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-    console.log(this.template);
-  }
-
+  ngOnInit() {}
 }

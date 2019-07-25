@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'modal-body',
@@ -6,14 +6,4 @@ import { Component, OnInit, ElementRef } from '@angular/core';
     <ng-content></ng-content>
   `,
 })
-export class ModalBodyComponent {
-
-  // constructor(private element: ElementRef) { }
-
-  // ngOnInit() {
-  //   const nativeElement: HTMLElement = this.element.nativeElement;
-  //   const firstChild = nativeElement.firstChild;
-  //   (firstChild as any).classList.add('modal-body');
-  // }
-
-}
+export class ModalBodyComponent {}

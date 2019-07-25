@@ -1,24 +1,8 @@
 <div class="container">
 
-  <alert-success [hidden]="!showMessageSuccess">
-    O empregado <strong>{{ employee?.name }}</strong> foi cadastrado com sucesso!
+  <alert-success [hidden]="!successMessage.show">
+    <span [innerHTML]="successMessage.message"></span>
   </alert-success>
-
-  <alert-success [hidden]="!showMessageEdit">
-    O empregado <strong>{{ employee?.name }}</strong> foi editado com sucesso!
-  </alert-success>
-
-  <alert-success [hidden]="!showMessageDelete">
-    O empregado <strong>{{ employee?.name }}</strong> foi excluído com sucesso!
-  </alert-success>
-
-  <h5>{{ data | date:'fullDate' }}</h5> <br>
-
-
-  <!-- <ng-container *ngIf="isLoading">
-    <ng-container *ngTemplateOutlet="loading"></ng-container>
-  </ng-container> -->
-
 
   <div class="row">
     <h1>Lista de empregados</h1>
@@ -41,8 +25,7 @@
       </thead>
 
       <tbody>
-        <ng-container *ngFor="let employee of employeeService.employees; let i=index;">
-          <tr [id]="'tr' + i">
+          <tr *ngFor="let employee of employees">   <!-- variavel 'employees' feita para usar com a API -->
             <td>
               <a href="javascript:void(0)" (click)="openDetailModal(employee)" style="text-decoration: none;"> {{ employee.name }} </a>
             </td>
@@ -53,15 +36,7 @@
               <a href="javascript:void(0)" (click)="openDestroyModal(employee)" style="text-decoration: none;">Excluir</a>
             </td>
           </tr>
-        </ng-container>
       </tbody>
     </table>
   </div>
 </div>
-
-<employee-detail-modal [employee]="employeeToDetail" (onDetail)="onDetailEmployee($event)"></employee-detail-modal>
-<!-- <employee-delete-modal [employee]="employeeToDelete" (onDestroy)="onDestroyEmployee($event)"></employee-delete-modal> -->
-<!--
-<ng-template #loading>
-  Carregando . . .
-</ng-template> -->

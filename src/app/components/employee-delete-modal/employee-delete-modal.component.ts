@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee, EmployeeService } from '../../services/employee.service';
 import { ModalRefService } from '../modal-dynamic/modal-ref.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'employee-delete-modal',
@@ -9,18 +10,25 @@ import { ModalRefService } from '../modal-dynamic/modal-ref.service';
 })
 export class EmployeeDeleteModalComponent implements OnInit {
 
-  employee: Employee;
+  employee: Employee = {
+    name: '',
+    salary: 0,
+    bonus: 0
+  };
+  employeeId: number;
 
-  constructor(private modalRef: ModalRefService, private employeeService: EmployeeService) {
+  constructor(private modalRef: ModalRefService, private http: HttpClient) {
     // tslint:disable-next-line: no-string-literal
-    this.employee = this.modalRef.context['employee'];
+    this.employeeId = this.modalRef.context['employeeId'];
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.http.get<Employee>(`http://localhost:3000/employees/${this.employeeId}`)
+    .subscribe(data => this.employee = data);  // data possui {name, salary, bonus}
+  }
 
   destroy() {
-    const copy = Object.assign({}, this.employee);
-    this.employeeService.destroyEmployee(this.employee);
-    this.modalRef.hide({employee: copy, submitted: true});
+    this.http.delete(`http://localhost:3000/employees/${this.employee.id}`)
+    .subscribe(data => this.modalRef.hide({employee: this.employee, submitted: true}));
   }
 }

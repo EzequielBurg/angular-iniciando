@@ -1,6 +1,9 @@
-<modal>
-  <h5 class="modal-title" modal-title> Empregado {{ employee?.name }} </h5>
-  <div class="modal-body" modal-body>
+<modal-title>
+  <h5 class="modal-title"> Empregado {{ employee?.name }} </h5>
+</modal-title>
+
+<modal-body>
+  <div class="modal-body">
     <table class="table table-bordered">
       <tbody>
         <tr>
@@ -22,19 +25,11 @@
 
       </tbody>
     </table>
-    <!-- <div [ngSwitch]="employee?.bonus">
-      <span *ngSwitchCase="10">Bônus baixo</span>
-      <ng-container *ngSwitchCase="100">Bônus médio</ng-container>
-      <ng-container *ngSwitchCase="1000">Bônus alto</ng-container>
-    </div> -->
-
-    <ng-container [ngSwitch]="employee?.bonus">
-        <span *ngSwitchCase="10">Bônus baixo</span>
-        <ng-container *ngSwitchCase="100" >Bônus médio</ng-container>
-        <ng-container *ngSwitchCase="1000">Bônus alto</ng-container>
-    </ng-container>
   </div>
-  <div class="modal-footer" modal-footer>
+</modal-body>
+
+<modal-footer>
+  <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
   </div>
-</modal>
+</modal-footer>

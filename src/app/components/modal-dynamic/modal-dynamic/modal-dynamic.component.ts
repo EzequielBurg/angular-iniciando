@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver, ElementRef, Injector, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver, ElementRef, Injector, OnDestroy } from '@angular/core';
 import { ModalContentDirective } from '../modal-content.directive';
 import { ModalRefService } from '../modal-ref.service';
 import { ReplaySubject } from 'rxjs';
@@ -80,7 +80,6 @@ export class ModalDynamicComponent implements OnInit, OnDestroy {
 
   private registerEvents() {
     $(this.divModal).on('hidden.bs.modal', (e) => {   // hidden.bs.modal é um evento do bootstrap
-      // console.log('escondido', e);
       this.onHide.next({
         event: e,
         data: this.hideEventData
@@ -88,7 +87,6 @@ export class ModalDynamicComponent implements OnInit, OnDestroy {
     });
 
     $(this.divModal).on('shown.bs.modal', (e) => {
-      // console.log('mostrado', e);
       this.onShow.next({
         event: e,
         data: this.showEventData
@@ -100,15 +98,4 @@ export class ModalDynamicComponent implements OnInit, OnDestroy {
     const nativeElement: HTMLElement = this.element.nativeElement;
     return nativeElement.firstChild as HTMLElement;
   }
-
-
-  /*
-  hide() {
-    $(this.divModal).hide();
-  }
-
-  showModal() {
-    $(this.divModal).show();
-  }
-  */
 }

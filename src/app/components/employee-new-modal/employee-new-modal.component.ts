@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import {Employee, EmployeeService} from '../../services/employee.service';
 import { InputDirective } from 'src/app/directives/input.directive';
 import { ModalRefService } from '../modal-dynamic/modal-ref.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 selector: 'employee-new-modal',
@@ -26,23 +27,18 @@ export class EmployeeNewModalComponent implements OnInit {
   @ViewChildren(InputDirective)
   inputs;
 
-  constructor(private employeeService: EmployeeService, private modalRef: ModalRefService) {}
-
-  ngAfterViewInit() {
-    console.log(this.inputs);
-  }
+  constructor(private employeeService: EmployeeService, private modalRef: ModalRefService, private http: HttpClient) {}
 
   ngOnInit() {
     this.modalRef.onShow.subscribe(() => {
-      console.log(this.inputName);
+      // console.log(this.inputName);
       // this.inputName.focus();
     });
   }
 
-  addEmployee(event) {
-    const copy = Object.assign({}, this.employee);
-    this.employeeService.addEmployee (copy);
-    this.modalRef.hide({employee: copy, submitted: true});
+  addEmployee(event) {    // mudanças para adicionar e mandar pra API. Também com fechamento automático da modal
+    this.http.post('http://localhost:3000/employees', this.employee)
+    .subscribe(data => this.modalRef.hide({employee: data, submitted: true}));
   }
 
   /*fechou(event) {

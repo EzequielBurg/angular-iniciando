@@ -1,6 +1,7 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../services/employee.service';
 import { ModalRefService } from '../modal-dynamic/modal-ref.service';
+import { HttpClient } from '@angular/common/http';
 
 declare const $;
 
@@ -9,30 +10,27 @@ declare const $;
   templateUrl: './employee-edit.component.html',
   styleUrls: ['./employee-edit.component.css']
 })
-export class EmployeeEditComponent implements OnInit, OnChanges {
+export class EmployeeEditComponent implements OnInit {
 
-  employee: Employee;
+  employee: Employee = {
+    name: '',
+    salary: 0,
+    bonus: 0
+  };
+  employeeId: number;
 
-  // @Input('ngModel')
-  // model: Employee
-
-  constructor(private modalRef: ModalRefService) {
+  constructor(private modalRef: ModalRefService, private http: HttpClient) {
     // tslint:disable-next-line: no-string-literal
-    this.employee = this.modalRef.context['employee'];
+    this.employeeId = this.modalRef.context['employeeId'];
   }
 
-  ngOnInit() {}
-
-  ngOnChanges(event) {
-    // if (this.model !== event) {
-    //   this.model.name = event(this.employee.name);
-    //   this.model.salary = event(this.employee.salary);
-    //   this.model.name = event(this.employee.bonus);
-    // }
+  ngOnInit() {
+    this.http.get<Employee>(`http://localhost:3000/employees/${this.employeeId}`)
+    .subscribe(data => this.employee = data);  // data possui {name, salary, bonus}
   }
 
-  editEmployee(event) {
-    const copy = Object.assign({}, this.employee);
-    this.modalRef.hide({employee: copy, submitted: true});
+  editEmployee() {
+    this.http.put(`http://localhost:3000/employees/${this.employee.id}`, this.employee)
+    .subscribe(data => this.modalRef.hide({employee: data, submitted: true}));
   }
 }
