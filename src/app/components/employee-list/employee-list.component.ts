@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService, Employee } from '../../services/employee.service';
+import { Employee } from '../../services/employee.service';
 import { EmployeeNewModalComponent } from '../employee-new-modal/employee-new-modal.component';
 import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
 import { EmployeeDeleteModalComponent } from '../employee-delete-modal/employee-delete-modal.component';
@@ -10,18 +10,13 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'employee-list',
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css']
+  styleUrls: ['./employee-list.component.scss']
 })
 export class EmployeeListComponent implements OnInit {
 
-  successMessage = {
-    message: '',
-    show: false
-  };
+  employees: Employee[] = [];    // feito para usar com a API
 
-  employees: any = [];    // feito para usar com a API
-
-  constructor(public employeeService: EmployeeService, private modalService: ModalServiceService, private http: HttpClient) {}
+  constructor(private modalService: ModalServiceService, private http: HttpClient) {}
 
   ngOnInit() {
     this.getEmployees();    // chamando listagem pela API
@@ -30,12 +25,7 @@ export class EmployeeListComponent implements OnInit {
   openNewModal() {
     const modalRef = this.modalService.create(EmployeeNewModalComponent);
     modalRef.onHide.subscribe((event) => {
-      const eventData = event.data;
-      if (eventData && eventData.hasOwnProperty('employee')) {
-        const employee = eventData.employee;
-        const message = `O empregado <strong>${employee.name}</strong> foi criado com sucesso`;
-        this.showSuccessMessage(message);
-      }
+      this.getEmployeesAfterSuccess(event);
     });
     modalRef.show();
   }
@@ -43,11 +33,7 @@ export class EmployeeListComponent implements OnInit {
   openEdit(employee: Employee) {
     const modalRef = this.modalService.create(EmployeeEditComponent, {employeeId: employee.id});
     modalRef.onHide.subscribe((event) => {
-      const eventData = event.data;
-      if (eventData && eventData.hasOwnProperty('employee')) {
-        const message = `O empregado <strong>${employee.name}</strong> foi alterado com sucesso`;
-        this.showSuccessMessage(message);
-      }
+      this.getEmployeesAfterSuccess(event);
     });
     modalRef.show();
 }
@@ -60,22 +46,16 @@ export class EmployeeListComponent implements OnInit {
   openDestroyModal(employee: Employee) {
     const modalRef = this.modalService.create(EmployeeDeleteModalComponent, {employeeId: employee.id});
     modalRef.onHide.subscribe((event) => {
-      const eventData = event.data;
-      if (eventData && eventData.hasOwnProperty('employee')) {
-        const message = `O empregado <strong>${employee.name}</strong> foi excluído com sucesso`;
-        this.showSuccessMessage(message);
-      }
+      this.getEmployeesAfterSuccess(event);
     });
     modalRef.show();
   }
 
-  showSuccessMessage(message) {
-    this.getEmployees();    // chamando novamente a API para atualizar a listagem após a ação
-    this.successMessage.message = message;
-    this.successMessage.show = true;
-    setTimeout(() => {
-      this.successMessage.show = false;
-    }, 3000);
+  getEmployeesAfterSuccess(event) {
+    const eventData = event.data;
+    if (eventData && eventData.hasOwnProperty('submitted')) {
+      this.getEmployees();
+    }
   }
 
   getEmployees() {

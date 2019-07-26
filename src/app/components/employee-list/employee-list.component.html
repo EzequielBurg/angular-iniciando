@@ -1,19 +1,22 @@
 <div class="container">
 
-  <alert-success [hidden]="!successMessage.show">
-    <span [innerHTML]="successMessage.message"></span>
-  </alert-success>
-
   <div class="row">
     <h1>Lista de empregados</h1>
 
     <table class="table table-striped">
       <thead class="thead-light">
         <tr>
-          <td colspan="3" style="padding: 20px 0 20px;">
-            <button class="btn btn-primary" (click)="openNewModal()" data-toggle="modal" data-target="#novoEmpregado">
-              Novo empregado
-            </button>
+          <td colspan="4" style="padding: 20px 0 20px;">
+            <div class="row">
+              <div class="col-2 col-md-1">
+                <button class="btn btn-primary" (click)="openNewModal()" title="Novo empregado">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <div class="col-9 col-md-11">
+                <employee-search></employee-search>
+              </div>
+            </div>
           </td>
         </tr>
         <tr>

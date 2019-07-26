@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import {Employee, EmployeeService} from '../../services/employee.service';
-import { InputDirective } from 'src/app/directives/input.directive';
+import { Employee } from '../../services/employee.service';
 import { ModalRefService } from '../modal-dynamic/modal-ref.service';
 import { HttpClient } from '@angular/common/http';
+import { NotifyMessageService } from 'src/app/services/notify-message.service';
 
 @Component({
 selector: 'employee-new-modal',
 templateUrl: './employee-new-modal.component.html',
-styleUrls: ['./employee-new-modal.component.css']
+styleUrls: ['./employee-new-modal.component.scss']
 })
+
 export class EmployeeNewModalComponent implements OnInit {
 
   employee: Employee = {
@@ -17,35 +18,15 @@ export class EmployeeNewModalComponent implements OnInit {
     bonus : 0
   };
 
-  @ViewChild(InputDirective, { static: true })
-  inputName: InputDirective;
-
-
-  // @ViewChild('inputSalary', { static: true })
-  // inputSalary: InputDirective;
-
-  @ViewChildren(InputDirective)
-  inputs;
-
-  constructor(private employeeService: EmployeeService, private modalRef: ModalRefService, private http: HttpClient) {}
+  constructor(private notifyMessage: NotifyMessageService, private modalRef: ModalRefService, private http: HttpClient) {}
 
   ngOnInit() {
-    this.modalRef.onShow.subscribe(() => {
-      // console.log(this.inputName);
-      // this.inputName.focus();
-    });
+
   }
 
   addEmployee(event) {    // mudanças para adicionar e mandar pra API. Também com fechamento automático da modal
     this.http.post('http://localhost:3000/employees', this.employee)
     .subscribe(data => this.modalRef.hide({employee: data, submitted: true}));
+    this.notifyMessage.success('Parabéns!', `O empregado <strong>${this.employee.name}</strong> foi criado com sucesso!`);
   }
-
-  /*fechou(event) {
-    console.log(event);
-  }
-
-  mostrou(event) {
-    console.log(event);
-  }*/
 }

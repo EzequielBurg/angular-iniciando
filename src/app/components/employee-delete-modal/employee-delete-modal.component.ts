@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee, EmployeeService } from '../../services/employee.service';
+import { Employee } from '../../services/employee.service';
 import { ModalRefService } from '../modal-dynamic/modal-ref.service';
 import { HttpClient } from '@angular/common/http';
+import { NotifyMessageService } from 'src/app/services/notify-message.service';
 
 @Component({
   selector: 'employee-delete-modal',
   templateUrl: './employee-delete-modal.component.html',
-  styleUrls: ['./employee-delete-modal.component.css']
+  styleUrls: ['./employee-delete-modal.component.scss']
 })
 export class EmployeeDeleteModalComponent implements OnInit {
 
@@ -17,7 +18,7 @@ export class EmployeeDeleteModalComponent implements OnInit {
   };
   employeeId: number;
 
-  constructor(private modalRef: ModalRefService, private http: HttpClient) {
+  constructor(private notifyMessage: NotifyMessageService, private modalRef: ModalRefService, private http: HttpClient) {
     // tslint:disable-next-line: no-string-literal
     this.employeeId = this.modalRef.context['employeeId'];
   }
@@ -30,5 +31,7 @@ export class EmployeeDeleteModalComponent implements OnInit {
   destroy() {
     this.http.delete(`http://localhost:3000/employees/${this.employee.id}`)
     .subscribe(data => this.modalRef.hide({employee: this.employee, submitted: true}));
+    this.notifyMessage.success('Parabéns!', `O empregado <strong>${this.employee.name}</strong> foi excluído com sucesso!`);
+
   }
 }

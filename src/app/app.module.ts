@@ -18,7 +18,8 @@ import { ModalContentDirective } from './components/modal-dynamic/modal-content.
 import { ModalTitleComponent } from './components/modal-dynamic/modal-title/modal-title.component';
 import { ModalBodyComponent } from './components/modal-dynamic/modal-body/modal-body.component';
 import { ModalFooterComponent } from './components/modal-dynamic/modal-footer/modal-footer.component';
-import { HttpClientModule } from '@angular/common/http';    // teste de http para fazer requisições AJAX
+import { HttpClientModule } from '@angular/common/http';
+import { EmployeeSearchComponent } from './components/employee-search/employee-search.component';    // teste de http para fazer requisições AJAX
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';    // teste de http par
     ModalTitleComponent,
     ModalBodyComponent,
     ModalFooterComponent,
+    EmployeeSearchComponent,
   ],
 
   entryComponents: [
