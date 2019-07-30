@@ -5,7 +5,7 @@ import { EmployeeEditComponent } from '../employee-edit/employee-edit.component'
 import { EmployeeDeleteModalComponent } from '../employee-delete-modal/employee-delete-modal.component';
 import { EmployeeDetailModalComponent } from '../employee-detail-modal/employee-detail-modal.component';
 import { ModalServiceService } from '../modal-dynamic/modal-service.service';
-import { HttpClient } from '@angular/common/http';
+import { EmployeeHttpService } from 'src/app/services/employee-http.service';
 
 @Component({
   selector: 'employee-list',
@@ -16,7 +16,24 @@ export class EmployeeListComponent implements OnInit {
 
   employees: Employee[] = [];    // feito para usar com a API
 
-  constructor(private modalService: ModalServiceService, private http: HttpClient) {}
+  search = '';
+
+  sortColumn = {column: 'name', sort: 'asc'};
+
+  pagination = {
+    itemsPerPage: 5,
+    currentPage: 1,
+    totalItems: 7
+  };
+
+  columns = [
+    {name: 'name', label: 'Nome', order: true},
+    {name: 'salary', label: 'Salário', order: true},
+    {label: 'Bônus'},
+    {label: 'Ações'},
+  ];
+
+  constructor(private modalService: ModalServiceService, private employeeHttp: EmployeeHttpService) {}
 
   ngOnInit() {
     this.getEmployees();    // chamando listagem pela API
@@ -58,8 +75,33 @@ export class EmployeeListComponent implements OnInit {
     }
   }
 
-  getEmployees() {
-    this.http.get<Employee[]>('http://localhost:3000/employees')
-    .subscribe(data => this.employees = data);   // feito para usar com a API
+  handleSearch(search) {    // método para lidar com as buscas
+    this.search = search;
+    this.pagination.currentPage = 1;
+    this.getEmployees();
+   }
+
+   handleSort() {
+     this.getEmployees();
+   }
+
+  handlePagination(page) {
+    this.pagination.currentPage = page;
+    this.getEmployees();
+  }
+
+  getEmployees() {    // feito para usar com a API
+    this.employeeHttp.list({
+      search: this.search,
+      sort: this.sortColumn,
+      pagination: {
+        page: this.pagination.currentPage,
+        perPage: this.pagination.itemsPerPage
+      }
+    })  // data corresponde ao body da resposta http, o corpo do resultado em JSON. Response corresponde À requisição inteira
+    .subscribe(response => {
+      this.pagination.totalItems = +response.headers.get('X-Total-Count');  // '+' serve para transformar um tipo qualquer em number
+      this.employees = response.body;
+    });
   }
 }

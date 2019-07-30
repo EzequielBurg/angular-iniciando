@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'employee-search',
@@ -23,13 +23,17 @@ export class EmployeeSearchComponent implements OnInit {
 
   search = '';
 
+  // tslint:disable-next-line: no-output-on-prefix
+  @Output()   // permite que quem usa esse comopnente se inscreva nesse evento
+  onSearch: EventEmitter<string> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
   }
 
   submit() {
-
+    this.onSearch.emit(this.search);
+    return false;     // impede o submit de recarregar a pagina
   }
-
 }

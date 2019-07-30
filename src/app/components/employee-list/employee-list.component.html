@@ -1,12 +1,12 @@
 <div class="container">
 
   <div class="row">
-    <h1>Lista de empregados</h1>
+    <h2>Lista de empregados</h2>
 
     <table class="table table-striped">
       <thead class="thead-light">
         <tr>
-          <td colspan="4">
+          <td colspan="3">
             <div class="row">
               <div class="col-2 col-md-1">
                 <button class="btn btn-primary" (click)="openNewModal()" title="Novo empregado">
@@ -14,32 +14,39 @@
                 </button>
               </div>
               <div class="col-9 col-md-11">
-                <employee-search></employee-search>
+                <employee-search (onSearch)="handleSearch($event)"></employee-search>
               </div>
             </div>
           </td>
         </tr>
         <tr>
-          <th>Nome</th>
-          <th>Salário</th>
-          <th>Bônus</th>
-          <th>Ações</th>
+          <ng-container *ngFor="let column of columns">
+            <ng-container *ngIf="column.order">
+                <th [sortColumn]="sortColumn" [columnName]="column.name" (onSort)="handleSort($event)">{{ column.label }}</th>
+            </ng-container>
+            <ng-container *ngIf="!column.order">
+              <th>{{ column.label }}</th>
+            </ng-container>
+          </ng-container>
         </tr>
       </thead>
 
       <tbody>
-          <tr *ngFor="let employee of employees">   <!-- variavel 'employees' feita para usar com a API -->
+          <!-- <tr *ngFor="let employee of employees | employeeFilter: search | order: sortColumn | paginate: pagination" > -->
+          <tr *ngFor="let employee of employees | paginate: pagination"> <!-- variavel 'employees' feita para usar com a API -->
             <td>
-              <a href="javascript:void(0)" (click)="openDetailModal(employee)" style="text-decoration: none;"> {{ employee.name }} </a>
+              <a href="javascript:void(0)" (click)="openDetailModal(employee)" style="text-decoration: none;"> {{ employee.name }}</a>
             </td>
             <td [innerHTML]="employee.salary | myCurrency" [salaryColor]="employee.salary"></td>
             <td> {{ employee.bonus | myCurrency }} </td>
             <td>
-              <a href="javascript:void(0)" (click)="openEdit(employee)" style="text-decoration: none;">Editar</a> |
+              <a href="javascript:void(0)" (click)="openEdit(employee)" style="text-decoration: none;">Editar</a> &nbsp;
               <a href="javascript:void(0)" (click)="openDestroyModal(employee)" style="text-decoration: none;">Excluir</a>
             </td>
           </tr>
       </tbody>
+      <!-- {{ sortColumn|json }}  serviu para testar o pipe -->
     </table>
+    <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="handlePagination($event)"></pagination-controls>
   </div>
 </div>

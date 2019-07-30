@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import PNotify from 'pnotify/dist/es/PNotify';
 import 'pnotify/dist/es/PNotifyButtons';
+declare const $;
 
 enum Types {
   success = 'success',
@@ -29,7 +30,8 @@ export class NotifyMessageService {
       titleTrusted: true,   // resolve o problema de nao renderizar html na mensagem
       text,
       textTrusted: true,
-      type
+      type,
+      stack: {"dir1": "down", "dir2": "right", "firstpos1": ($(window).height() / 1.2), "firstpos2": ($(window).width() / 1.31 - 50)}
     });
   }
 

@@ -19,7 +19,11 @@ import { ModalTitleComponent } from './components/modal-dynamic/modal-title/moda
 import { ModalBodyComponent } from './components/modal-dynamic/modal-body/modal-body.component';
 import { ModalFooterComponent } from './components/modal-dynamic/modal-footer/modal-footer.component';
 import { HttpClientModule } from '@angular/common/http';
-import { EmployeeSearchComponent } from './components/employee-search/employee-search.component';    // teste de http para fazer requisições AJAX
+import { EmployeeSearchComponent } from './components/employee-search/employee-search.component';
+import { EmployeeFilterPipe } from './pipes/employee-filter.pipe';
+import { SortColumnComponent } from './components/sort-column/sort-column.component';
+import { OrderPipe } from './pipes/order.pipe';    // teste de http para fazer requisições AJAX
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,9 @@ import { EmployeeSearchComponent } from './components/employee-search/employee-s
     ModalBodyComponent,
     ModalFooterComponent,
     EmployeeSearchComponent,
+    EmployeeFilterPipe,
+    SortColumnComponent,
+    OrderPipe,
   ],
 
   entryComponents: [
@@ -54,7 +61,8 @@ import { EmployeeSearchComponent } from './components/employee-search/employee-s
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule  // teste de http
+    HttpClientModule,  // teste de http
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
