@@ -31,7 +31,7 @@ export class NotifyMessageService {
       text,
       textTrusted: true,
       type,
-      stack: {"dir1": "down", "dir2": "right", "firstpos1": ($(window).height() / 1.2), "firstpos2": ($(window).width() / 1.31 - 50)}
+      stack: {"dir1": "down", "dir2": "right", "firstpos1": ($(window).height() / 1.2 - 50), "firstpos2": ($(window).width() / 1.31 - 50)}
     });
   }
 

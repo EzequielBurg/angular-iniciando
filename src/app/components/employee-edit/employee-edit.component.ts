@@ -20,13 +20,19 @@ export class EmployeeEditComponent implements OnInit {
   };
   employeeId: number;
 
+  error = false;
+
   constructor(private notifyMessage: NotifyMessageService, private modalRef: ModalRefService, private employeeHttp: EmployeeHttpService) {
     // tslint:disable-next-line: no-string-literal
     this.employeeId = this.modalRef.context['employeeId'];
   }
 
-  ngOnInit() {
-    this.employeeHttp.get(this.employeeId).subscribe(data => this.employee = data);  // data possui {name, salary, bonus}
+  async ngOnInit() {
+    try {
+      this.employee = await this.employeeHttp.get(this.employeeId).toPromise();
+    } catch (e) {
+      this.error = true;
+    }
   }
 
   editEmployee() {

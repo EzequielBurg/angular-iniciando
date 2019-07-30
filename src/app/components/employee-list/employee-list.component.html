@@ -44,6 +44,9 @@
               <a href="javascript:void(0)" (click)="openDestroyModal(employee)" style="text-decoration: none;">Excluir</a>
             </td>
           </tr>
+          <tr *ngIf="!employees.length">
+            <td [colSpan]="columns.length" style="text-align: center">Nenhum registro encontrado</td>
+          </tr>
       </tbody>
       <!-- {{ sortColumn|json }}  serviu para testar o pipe -->
     </table>

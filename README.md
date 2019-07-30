@@ -1,4 +1,4 @@
-# IniciandoAngular - Angular Componentes - Angular Componentes/Intermediário - Angular Templates e HTML - Angular Componentes Dinâmicos - Angular HTTP Básico - Angular HTTP e CRUD
+# IniciandoAngular - Angular Componentes - Angular Componentes/Intermediário - Angular Templates e HTML - Angular Componentes Dinâmicos - Angular HTTP Básico - Angular HTTP e CRUD - Angular Reactive X
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0, and has several courses of School of Net.
 

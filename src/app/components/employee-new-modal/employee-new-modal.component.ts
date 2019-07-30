@@ -20,9 +20,7 @@ export class EmployeeNewModalComponent implements OnInit {
 
   constructor(private notifyMessage: NotifyMessageService, private modalRef: ModalRefService, private employeeHttp: EmployeeHttpService) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   addEmployee(event) {    // mudanças para adicionar e mandar pra API. Também com fechamento automático da modal
     this.employeeHttp.create(this.employee).subscribe(data => this.modalRef.hide({employee: data, submitted: true}));

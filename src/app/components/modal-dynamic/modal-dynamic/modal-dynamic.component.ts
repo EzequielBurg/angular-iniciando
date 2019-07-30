@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ComponentFactoryResolver, ElementRef, Injector, OnDestroy } from '@angular/core';
 import { ModalContentDirective } from '../modal-content.directive';
 import { ModalRefService } from '../modal-ref.service';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 declare const $;
 
 @Component({
@@ -20,9 +21,11 @@ declare const $;
 
 export class ModalDynamicComponent implements OnInit, OnDestroy {
 
-  onHide: ReplaySubject<any> = new ReplaySubject(1);
+  // tslint:disable-next-line: variable-name
+  private _onHide: ReplaySubject<any> = new ReplaySubject(1);
 
-  onShow: ReplaySubject<any> = new ReplaySubject(1);
+  // tslint:disable-next-line: variable-name
+  private _onShow: ReplaySubject<any> = new ReplaySubject(1);
 
   @ViewChild(ModalContentDirective, { static: true }) modalContent: ModalContentDirective;
   modalRef: ModalRefService;
@@ -34,6 +37,14 @@ export class ModalDynamicComponent implements OnInit, OnDestroy {
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private element: ElementRef, private injector: Injector) { }
 
   ngOnInit() {}
+
+  get onHide(): Observable<any> {
+    return this._onHide.pipe(first());
+  }
+
+  get onShow(): Observable<any> {
+    return this._onShow.pipe(first());
+  }
 
   ngOnDestroy() {
     // console.log('modal dynamic component destruído');
@@ -80,14 +91,14 @@ export class ModalDynamicComponent implements OnInit, OnDestroy {
 
   private registerEvents() {
     $(this.divModal).on('hidden.bs.modal', (e) => {   // hidden.bs.modal é um evento do bootstrap
-      this.onHide.next({
+      this._onHide.next({
         event: e,
         data: this.hideEventData
       });
     });
 
     $(this.divModal).on('shown.bs.modal', (e) => {
-      this.onShow.next({
+      this._onShow.next({
         event: e,
         data: this.showEventData
       });

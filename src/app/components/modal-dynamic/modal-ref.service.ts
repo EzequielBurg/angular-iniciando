@@ -21,10 +21,13 @@ export class ModalRefService {
 
   set componentRef(compRef: ComponentRef<ModalDynamicComponent>) {
     const instance = compRef.instance;
-    instance.onHide.subscribe(() => {
-      // instance.dispose();
-      this.appRef.detachView(compRef.hostView);
-      compRef.destroy();
+    const subscriber = instance.onHide.subscribe(() => {
+      setTimeout(() => {
+        instance.dispose();
+        this.appRef.detachView(compRef.hostView);
+        compRef.destroy();
+        subscriber.unsubscribe();
+      }, 3000);
     });
   }
 

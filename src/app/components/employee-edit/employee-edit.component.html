@@ -2,7 +2,8 @@
   <h5 class="modal-title">Editar empregado {{ employee.name }}</h5>
 </modal-title>
 
-<form (submit)="editEmployee()" >
+<form (submit)="editEmployee()">
+  <fieldset [disabled]="error">     <!--fieldset serve para desabilitar a modal caso haja um erro na app-->
   <modal-body>
     <div class="modal-body">
       <div class="form-group">
@@ -26,4 +27,5 @@
         <button type="submit" class="btn btn-primary">Salvar</button>
     </div>
   </modal-footer>
+  </fieldset>
 </form>

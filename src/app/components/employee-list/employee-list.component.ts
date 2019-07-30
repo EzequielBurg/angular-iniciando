@@ -89,7 +89,8 @@ export class EmployeeListComponent implements OnInit {
     this.pagination.currentPage = page;
     this.getEmployees();
   }
-
+  // memory-leak -> vazamento de memória RAM
+  // apos a inscrição no evento, o observable continua na memória
   getEmployees() {    // feito para usar com a API
     this.employeeHttp.list({
       search: this.search,
@@ -99,9 +100,11 @@ export class EmployeeListComponent implements OnInit {
         perPage: this.pagination.itemsPerPage
       }
     })  // data corresponde ao body da resposta http, o corpo do resultado em JSON. Response corresponde À requisição inteira
-    .subscribe(response => {
-      this.pagination.totalItems = +response.headers.get('X-Total-Count');  // '+' serve para transformar um tipo qualquer em number
-      this.employees = response.body;
+    .subscribe(data => {
+      this.pagination.totalItems = data.meta.total;
+      this.pagination.itemsPerPage = data.meta.perPage;
+      this.pagination.currentPage = data.meta.page;
+      this.employees = data.data;
     });
   }
 }
