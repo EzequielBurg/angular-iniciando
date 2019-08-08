@@ -23,7 +23,7 @@ export class EmployeeListComponent implements OnInit {
   pagination = {
     itemsPerPage: 5,
     currentPage: 1,
-    totalItems: 7
+    totalItems: 0
   };
 
   columns = [
@@ -53,7 +53,7 @@ export class EmployeeListComponent implements OnInit {
       this.getEmployeesAfterSuccess(event);
     });
     modalRef.show();
-}
+  }
 
   openDetailModal(employee: Employee) {
     const modalRef = this.modalService.create(EmployeeDetailModalComponent, {employee});

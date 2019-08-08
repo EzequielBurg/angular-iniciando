@@ -35,7 +35,10 @@
           <!-- <tr *ngFor="let employee of employees | employeeFilter: search | order: sortColumn | paginate: pagination" > -->
           <tr *ngFor="let employee of employees | paginate: pagination"> <!-- variavel 'employees' feita para usar com a API -->
             <td>
-              <a href="javascript:void(0)" (click)="openDetailModal(employee)" style="text-decoration: none;"> {{ employee.name }}</a>
+              <a href="javascript:void(0)" (click)="openDetailModal(employee)">
+                <i class="fas fa-eye"></i>
+              </a>
+              {{ employee.name }}
             </td>
             <td [innerHTML]="employee.salary | myCurrency" [salaryColor]="employee.salary"></td>
             <td> {{ employee.bonus | myCurrency }} </td>
